@@ -1,6 +1,6 @@
 {
   "name": "MoonUnlockUnhide",
-  "version_number": "1.1.0",
+  "version_number": "1.1.1",
   "website_url": "https://github.com/ProjectBots/LCMoonUnlockUnhide",
   "description": "Unlocks and Unhides all Moons!",
   "dependencies": [

@@ -21,10 +21,10 @@ namespace MoonUnlockUnhide
 		public static Harmony harmony = new Harmony(modGUID);
 		public static ManualLogSource mls;
 
-
 		void Awake()
 		{
 			mls = BepInEx.Logging.Logger.CreateLogSource(modGUID);
+
 			harmony.PatchAll(typeof(UnlockUnhidePatch));
 
 			StarlancerMoonsPatch.onAwake();

@@ -1,3 +1,5 @@
+## Version 1.1.1
+	- Fixed not registered moons unhiding, ignoring them from now on
 
 ## Version 1.1.0
 	- StarlancerZero is now routable as starlancerzero instead of anomaly

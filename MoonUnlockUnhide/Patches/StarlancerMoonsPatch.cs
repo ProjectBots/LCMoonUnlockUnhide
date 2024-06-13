@@ -7,7 +7,6 @@ using System.Threading.Tasks;
 
 namespace MoonUnlockUnhide
 {
-
 	internal static class StarlancerMoonsPatch
 	{
 		public static void onAwake()
