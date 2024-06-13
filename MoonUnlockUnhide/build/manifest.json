@@ -1,8 +1,8 @@
 {
   "name": "MoonUnlockUnhide",
-  "version_number": "1.0.0",
+  "version_number": "1.1.0",
   "website_url": "https://github.com/ProjectBots/LCMoonUnlockUnhide",
-  "description": "A mod to unlocks and unhides all moons.",
+  "description": "Unlocks and Unhides all Moons!",
   "dependencies": [
     "BepInEx-BepInExPack-5.4.2100",
     "IAmBatby-LethalLevelLoader-1.2.4"
