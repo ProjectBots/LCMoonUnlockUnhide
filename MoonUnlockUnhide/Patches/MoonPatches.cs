@@ -3,21 +3,22 @@ using LethalLevelLoader;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Emit;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace MoonUnlockUnhide
 {
 	[HarmonyPatch(typeof(HangarShipDoor), "Start")]
-	public class MoonPatches
+	internal static class UnlockUnhidePatch
 	{
-		private static string[] ignoreMoons = { "GordionExtendedLevel", "LiquidationExtendedLevel" };
-		static void Postfix()
+		private static readonly string[] ignoreMoons = { "Gordion", "Liquidation" };
+		public static void Postfix()
 		{
 			List<ExtendedLevel> allExtendedLevels = PatchedContent.ExtendedLevels;
 			foreach (ExtendedLevel level in allExtendedLevels)
 			{
-				if (ignoreMoons.Contains(level.name))
+				if (ignoreMoons.Contains(level.NumberlessPlanetName))
 					continue;
 
 				if (level.IsRouteHidden)
