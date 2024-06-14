@@ -25,7 +25,7 @@ namespace MoonUnlockUnhide
 
 			foreach (ExtendedLevel level in allExtendedLevels)
 			{
-				if (ignoreMoons.Contains(level.NumberlessPlanetName))
+				if (ignoreMoons.Contains(level.NumberlessPlanetName.ToLower()))
 					continue;
 
 				// check if the level is hidden or locked
@@ -63,7 +63,7 @@ namespace MoonUnlockUnhide
 						bool found = false;
 						foreach (CompatibleNoun item in new List<CompatibleNoun>(routeKeyword.compatibleNouns))
 						{
-							if(item.result == level.RouteNode)
+							if (item.result == level.RouteNode)
 							{
 								found = true;
 								break;
@@ -71,8 +71,7 @@ namespace MoonUnlockUnhide
 						}
 						if (!found)
 						{
-							Plugin.mls.LogInfo("Ignoring " + level.NumberlessPlanetName);
-							ignoreMoons.Add(level.NumberlessPlanetName);
+							ignoreMoons.Add(level.NumberlessPlanetName.ToLower());
 						}
 					}
 				}
@@ -84,6 +83,19 @@ namespace MoonUnlockUnhide
 			else
 			{
 				Plugin.mls.LogError("Unable to find LethalLevelLoader.TerminalManager");
+			}
+
+			// ignore moons that are in the ignoreMoonsList
+			string[] ignoreMoonsList = ConfigManager.ignoreMoonsList.Value.Split(',');
+			foreach (string moon in ignoreMoonsList)
+			{
+				ignoreMoons.Add(moon.ToLower());
+			}
+
+			// log ignored moons
+			foreach (string moon in ignoreMoons)
+			{
+				Plugin.mls.LogInfo("Ignoring " + moon);
 			}
 		}
 

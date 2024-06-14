@@ -1,3 +1,6 @@
+## Version 1.2.0
+	- Added config option to ignore moons
+
 ## Version 1.1.1
 	- Fixed not registered moons unhiding, ignoring them from now on
 

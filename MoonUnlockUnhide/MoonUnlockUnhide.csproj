@@ -60,6 +60,7 @@
     <Reference Include="UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ConfigManager.cs" />
     <Compile Include="Patches\UnlockUnhidePatch.cs" />
     <Compile Include="Patches\StarlancerMoonsPatch.cs" />
     <Compile Include="Plugin.cs" />
@@ -78,6 +79,7 @@
   <PropertyGroup>
     <PostBuildEvent>copy /Y "C:\Users\matth\source\repos\MoonUnlockUnhide\MoonUnlockUnhide\bin\Debug\MoonUnlockUnhide.dll" "C:\Users\matth\source\repos\MoonUnlockUnhide\MoonUnlockUnhide\build\"
 xcopy "C:\Users\matth\source\repos\MoonUnlockUnhide\MoonUnlockUnhide\build\" "C:\Program Files (x86)\Steam\steamapps\common\Lethal Company\BepInEx\plugins\ProjectBots-MoonUnlockUnhide" /Y /E
+copy /Y "C:\Users\matth\source\repos\MoonUnlockUnhide\MoonUnlockUnhide\build\README.md" "C:\Users\matth\source\repos\MoonUnlockUnhide\"
 "C:\Program Files (x86)\Steam\Steam.exe" -applaunch 1966720 --doorstop-enable true --doorstop-target "C:\Program Files (x86)\Steam\steamapps\common\Lethal Company\BepInEx\core\BepInEx.Preloader.dll"</PostBuildEvent>
   </PropertyGroup>
 </Project>
