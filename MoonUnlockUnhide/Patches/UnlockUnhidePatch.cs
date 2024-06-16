@@ -3,6 +3,7 @@ using LethalLevelLoader;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Reflection.Emit;
 using System.Text;
 using System.Threading.Tasks;
@@ -45,45 +46,36 @@ namespace MoonUnlockUnhide
 		private static void genIgnoreMoonsList(List<ExtendedLevel> allExtendedLevels)
 		{
 			Plugin.mls.LogInfo("Generating ignoreMoons list");
-
 			ignoreMoons = new List<string>();
 
 			// ignore moons that are not registered in the terminal manager
-
-			Type type = Type.GetType("LethalLevelLoader.TerminalManager, LethalLevelLoader");
-			if (type != null)
+			FieldInfo field = Utils.getInternalStaticField("LethalLevelLoader.TerminalManager, LethalLevelLoader", "routeKeyword");
+			if (field != null)
 			{
-				System.Reflection.FieldInfo field = type.GetField("routeKeyword", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Static);
-				if (field != null)
-				{
-					TerminalKeyword routeKeyword = (TerminalKeyword)field.GetValue(null);
+				TerminalKeyword routeKeyword = (TerminalKeyword)field.GetValue(null);
 
-					foreach (ExtendedLevel level in allExtendedLevels)
+				foreach (ExtendedLevel level in allExtendedLevels)
+				{
+					bool found = false;
+					foreach (CompatibleNoun item in new List<CompatibleNoun>(routeKeyword.compatibleNouns))
 					{
-						bool found = false;
-						foreach (CompatibleNoun item in new List<CompatibleNoun>(routeKeyword.compatibleNouns))
+						if (item.result == level.RouteNode)
 						{
-							if (item.result == level.RouteNode)
-							{
-								found = true;
-								break;
-							}
-						}
-						if (!found)
-						{
-							ignoreMoons.Add(level.NumberlessPlanetName.ToLower());
+							found = true;
+							break;
 						}
 					}
-				}
-				else
-				{
-					Plugin.mls.LogError("Could not find the field routeKeyword in LethalLevelLoader.TerminalManager");
+					if (!found)
+					{
+						ignoreMoons.Add(level.NumberlessPlanetName.ToLower());
+					}
 				}
 			}
 			else
 			{
-				Plugin.mls.LogError("Unable to find LethalLevelLoader.TerminalManager");
+				Plugin.mls.LogError("Could not find the field routeKeyword in LethalLevelLoader.TerminalManager");
 			}
+
 
 			// ignore moons that are in the ignoreMoonsList
 			string[] ignoreMoonsList = ConfigManager.ignoreMoonsList.Value.Split(',');

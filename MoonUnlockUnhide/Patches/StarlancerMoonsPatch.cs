@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -11,26 +12,16 @@ namespace MoonUnlockUnhide
 	{
 		public static void onAwake()
 		{
-			Type type = Type.GetType("StarlancerMoons.TerminalManagerPatch, StarlancerMoons");
-			if (type != null)
+			FieldInfo field = Utils.getInternalStaticField("StarlancerMoons.TerminalManagerPatch, StarlancerMoons", "KeywordReplacements");
+			if (field == null)
 			{
-				System.Reflection.FieldInfo field = type.GetField("KeywordReplacements", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Static);
-				if (field != null)
-				{
-					Dictionary<string, string> replacements = (Dictionary<string, string>)field.GetValue(null);
-					replacements["starlancerzero"] = "starlancerzero";
+				Plugin.mls.LogWarning("Could not find the field KeywordReplacements in StarlancerMoons.TerminalManagerPatch, StarlancerMoons may not be installed.");
+				return;
+			}
+			Dictionary<string, string> replacements = (Dictionary<string, string>)field.GetValue(null);
+			replacements["starlancerzero"] = "starlancerzero";
 
-					Plugin.mls.LogInfo("StarlancerTero is now routable as starlancerzero");
-				}
-				else
-				{
-					Plugin.mls.LogError("Could not find the field KeywordReplacements in StarlancerMoons.TerminalManagerPatch");
-				}
-			}
-			else
-			{
-				Plugin.mls.LogWarning("Unable to find StarlancerMoons.TerminalManagerPatch, StarlancerMoons may not be installed.");
-			}
+			Plugin.mls.LogInfo("StarlancerTero is now routable as starlancerzero");
 		}
 	}
 }

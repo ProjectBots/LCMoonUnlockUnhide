@@ -16,7 +16,7 @@ namespace MoonUnlockUnhide
 	{
 		const string modGUID = "ProjectBots.MoonUnlockUnhide";
 		const string modName = "MoonUnlockUnhide";
-		const string modVersion = "1.2.0";
+		const string modVersion = "1.2.1";
 
 		public static Harmony harmony = new Harmony(modGUID);
 		public static ManualLogSource mls;

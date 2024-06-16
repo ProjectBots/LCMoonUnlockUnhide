@@ -1,3 +1,6 @@
+## Version 1.2.1
+	- updated readme
+
 ## Version 1.2.0
 	- Added config option to ignore moons
 
@@ -5,7 +8,7 @@
 	- Fixed not registered moons unhiding, ignoring them from now on
 
 ## Version 1.1.0
-	- StarlancerZero is now routable as starlancerzero instead of anomaly
+	- StarlancerZero is now routable as starlancerzero instead of [REDACTED]
 	- Fixed typos
 	- Removed unnecessary error message i only added for testing
 
